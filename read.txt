@@ -1,0 +1,17 @@
+------tailwindcss & nextjs---------
+npm i -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+npm i @heroicons/react
+
+npm i js-cookie
+
+npm install react-hook-form
+
+npm i mongoose
+
+npm i next-auth
+
+npm install @headlessui/react
+
+npm install @paypal/react-paypal-js
