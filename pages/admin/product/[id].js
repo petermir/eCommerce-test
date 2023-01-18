@@ -38,7 +38,7 @@ function reducer(state, action) {
       return state;
   }
 }
-export default function AdminProductEditScreen() {
+export default function AdminProductEditView() {
   const { query } = useRouter();
   const productId = query.id;
   const [{ loading, error, loadingUpdate, loadingUpload }, dispatch] =
@@ -65,7 +65,6 @@ export default function AdminProductEditScreen() {
         setValue('price', data.price);
         setValue('image', data.image);
         setValue('category', data.category);
-        setValue('brand', data.brand);
         setValue('countInStock', data.countInStock);
         setValue('description', data.description);
       } catch (err) {
@@ -79,7 +78,7 @@ export default function AdminProductEditScreen() {
   const router = useRouter();
 
   const uploadHandler = async (e, imageField = 'image') => {
-    const url = `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/upload`;
+    const url = `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/upload`;
     try {
       dispatch({ type: 'UPLOAD_REQUEST' });
       const {
@@ -91,7 +90,7 @@ export default function AdminProductEditScreen() {
       formData.append('file', file);
       formData.append('signature', signature);
       formData.append('timestamp', timestamp);
-      formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY);
+      formData.append('api_key', process.env.CLOUDINARY_API_KEY);
       const { data } = await axios.post(url, formData);
       dispatch({ type: 'UPLOAD_SUCCESS' });
       setValue(imageField, data.secure_url);
@@ -108,7 +107,6 @@ export default function AdminProductEditScreen() {
     price,
     category,
     image,
-    brand,
     countInStock,
     description,
   }) => {
@@ -120,7 +118,6 @@ export default function AdminProductEditScreen() {
         price,
         category,
         image,
-        brand,
         countInStock,
         description,
       });
@@ -145,8 +142,8 @@ export default function AdminProductEditScreen() {
               <Link href="/admin/orders">Orders</Link>
             </li>
             <li>
-              <Link href="/admin/products">
-                <a className="font-bold">Products</a>
+              <Link href="/admin/products" className="font-bold">
+                Products
               </Link>
             </li>
             <li>
@@ -248,20 +245,6 @@ export default function AdminProductEditScreen() {
                 )}
               </div>
               <div className="mb-4">
-                <label htmlFor="brand">brand</label>
-                <input
-                  type="text"
-                  className="w-full"
-                  id="brand"
-                  {...register('brand', {
-                    required: 'Please enter brand',
-                  })}
-                />
-                {errors.brand && (
-                  <div className="text-red-500">{errors.brand.message}</div>
-                )}
-              </div>
-              <div className="mb-4">
                 <label htmlFor="countInStock">countInStock</label>
                 <input
                   type="text"
@@ -309,4 +292,4 @@ export default function AdminProductEditScreen() {
   );
 }
 
-AdminProductEditScreen.auth = { adminOnly: true };
+AdminProductEditView.auth = { adminOnly: true };

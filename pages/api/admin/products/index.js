@@ -5,9 +5,8 @@ import db from '../../../../utils/db';
 const handler = async (req, res) => {
   const session = await getSession({ req });
   if (!session || !session.user.isAdmin) {
-    return res.status(401).send('admin signin required');
+    return res.status(401).send('Admin signin required');
   }
-  // const { user } = session;
   if (req.method === 'GET') {
     return getHandler(req, res);
   } else if (req.method === 'POST') {
@@ -21,10 +20,9 @@ const postHandler = async (req, res) => {
   const newProduct = new Product({
     name: 'sample name',
     slug: 'sample-name-' + Math.random(),
-    image: '/images/shirt1.jpg',
+    image: '/images/ex.jpg',
     price: 0,
     category: 'sample category',
-    brand: 'sample brand',
     countInStock: 0,
     description: 'sample description',
     rating: 0,

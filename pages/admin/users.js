@@ -27,7 +27,7 @@ function reducer(state, action) {
   }
 }
 
-function AdminUsersScreen() {
+function AdminUsersView() {
   const [{ loading, error, users, successDelete, loadingDelete }, dispatch] =
     useReducer(reducer, {
       loading: true,
@@ -82,8 +82,8 @@ function AdminUsersScreen() {
               <Link href="/admin/products">Products</Link>
             </li>
             <li>
-              <Link href="/admin/users">
-                <a className="font-bold">Users</a>
+              <Link href="/admin/users" className="font-bold">
+                Users
               </Link>
             </li>
           </ul>
@@ -115,10 +115,12 @@ function AdminUsersScreen() {
                       <td className=" p-5 ">{user.email}</td>
                       <td className=" p-5 ">{user.isAdmin ? 'YES' : 'NO'}</td>
                       <td className=" p-5 ">
-                        <Link href={`/admin/user/${user._id}`} passHref>
-                          <a type="button" className="default-button">
-                            Edit
-                          </a>
+                        <Link
+                          href={`/admin/user/${user._id}`}
+                          passHref
+                          className="default-button"
+                        >
+                          Edit
                         </Link>
                         &nbsp;
                         <button
@@ -141,5 +143,5 @@ function AdminUsersScreen() {
   );
 }
 
-AdminUsersScreen.auth = { adminOnly: true };
-export default AdminUsersScreen;
+AdminUsersView.auth = { adminOnly: true };
+export default AdminUsersView;

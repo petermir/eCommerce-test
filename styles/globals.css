@@ -14,15 +14,24 @@ body {
 }
 
 nav {
-  background-color: rgb(255, 244, 244);
+  background-color: rgb(86, 97, 121);
 }
 
 footer {
-  background-color: rgb(255, 244, 244);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  bottom: 0;
+  background-color: rgb(86, 97, 121);
+}
+
+.scale-20 {
+  scale: 0.25;
 }
 
 .card {
-  @apply mb-5  block   rounded-lg border border-gray-200  shadow-md;
+  @apply mb-5 block rounded-lg border border-gray-200 shadow-md;
 }
 
 .primary-button {

@@ -8,7 +8,18 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Menu } from '@headlessui/react';
 import DropdownLink from './DropdownLink';
-/* import { ShoppingBagIcon } from '@heroicons/react/24/outline'; */
+import { useRouter } from 'next/router';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import { ShoppingBagIcon } from '@heroicons/react/24/outline';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faFacebook,
+  faYoutube,
+  faTwitter,
+  faInstagram,
+  faInstagramSquare,
+} from '@fortawesome/free-brands-svg-icons';
 
 function Layout({ title, children }) {
   const { status, data: session } = useSession();
@@ -24,6 +35,14 @@ function Layout({ title, children }) {
     Cookies.remove('cart');
     dispatch({ type: 'CART_RESET' });
     signOut({ callbackUrl: '/login' });
+  };
+
+  const [query, setQuery] = useState('');
+
+  const router = useRouter();
+  const submitHandler = (e) => {
+    e.preventDefault();
+    router.push(`/search?query=${query}`);
   };
 
   return (
@@ -51,16 +70,35 @@ function Layout({ title, children }) {
 
       <div className="flex min-h-screen flex-col justify-between">
         <header className="static">
-          <nav className="flex h-12 items-center justify-between px-5 shadow-lg">
-            <Link href="/" className="text-lg font-bold">
+          <nav className="flex h-24 items-center justify-between px-5 shadow-lg">
+            <Link href="/" className="text-3xl font-bold text-gray-100">
               NanaShop
             </Link>
-            <div>
+            <form
+              onSubmit={submitHandler}
+              className="mx-auto w-64 justify-center md:flex"
+            >
+              <input
+                onChange={(e) => setQuery(e.target.value)}
+                type="text"
+                className="rounded-tr-none rounded-br-none p-1 text-sm   focus:ring-0"
+                placeholder="Search products"
+              />
+              <button
+                className="rounded rounded-tl-none rounded-bl-none bg-amber-300 p-1 text-sm dark:text-black"
+                type="submit"
+                id="button-addon2"
+              >
+                <MagnifyingGlassIcon className="h-5 w-5"></MagnifyingGlassIcon>
+              </button>
+            </form>
+            <div className="flex">
               {status === 'loading' ? (
                 'Loading'
               ) : session?.user ? (
-                <Menu as="div" className="relative inline-block">
-                  <Menu.Button className="text-blue-600">
+                <Menu as="div" className="relative flex">
+                  <Menu.Button className="text-blue-600 pr-2">
+                    <ChevronDownIcon className="h-5 w-5 m-auto"></ChevronDownIcon>
                     {session.user.name}
                   </Menu.Button>
                   <Menu.Items className="absolute right-0 w-56 origin-top-right bg-white  shadow-lg ">
@@ -88,37 +126,80 @@ function Layout({ title, children }) {
                       </Menu.Item>
                     )}
                     <Menu.Item>
-                      <a
+                      <DropdownLink
                         className="dropdown-link"
                         href="#"
                         onClick={logoutClickHandler}
                       >
                         Logout
-                      </a>
+                      </DropdownLink>
                     </Menu.Item>
                   </Menu.Items>
                 </Menu>
               ) : (
-                <Link href="/login" className="p-2">
+                <Link href="/login" className="p-2 text-gray-100">
                   Login
                 </Link>
               )}
               <Link href="/cart" className="p-2">
-                Cart
                 {cartItemsCount > 0 && (
-                  <span className="ml-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">
-                    {cartItemsCount}
-                  </span>
+                  <div className="ml-3 translate-y-1">
+                    <span className="rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white">
+                      {cartItemsCount}
+                    </span>
+                  </div>
                 )}
+                <ShoppingBagIcon className="h-7 w-7 text-gray-100"></ShoppingBagIcon>
               </Link>
             </div>
           </nav>
         </header>
 
-        <main className="container m-auto mt-4 px-5">{children}</main>
+        <main className="m-auto mt-4 px-5">{children}</main>
 
-        <footer className="flex h-40 justify-center items-center shadow-inner">
-          <div>Copyright @ 2023 NanaShop</div>
+        <footer>
+          <div className="text-center">
+            <h2 className="text-lg p-4 text-gray-100">Get in touch!</h2>
+
+            <p className="text-center p-5 text-gray-100">
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Veritatis obcaecati, nam molestias voluptatibus voluptatum
+              accusantium quasi itaque, nemo assumenda et asperiores voluptate
+              repellat repudiandae officia.
+            </p>
+          </div>
+          {/* <div>
+            <FontAwesomeIcon
+              icon={faFacebook}
+              className="p-4"
+              style={{ width: '10rem', color: '#3b5998' }}
+            />
+
+            <FontAwesomeIcon
+              icon={faInstagram}
+              className="p-4"
+              style={{
+                width: '10rem',
+                color: '#C13584',
+              }}
+            />
+            <FontAwesomeIcon
+              icon={faTwitter}
+              className="p-4"
+              style={{ width: '10rem', color: '#00acee' }}
+            />
+            <FontAwesomeIcon
+              icon={faYoutube}
+              className="p-4"
+              style={{ width: '10rem', color: '#FF0000' }}
+            />
+          </div> */}
+
+          <div>
+            <p>
+              Copyright &copy; 2023 <em>NanaShop</em>
+            </p>
+          </div>
         </footer>
       </div>
     </>

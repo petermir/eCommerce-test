@@ -45,7 +45,7 @@ function reducer(state, action) {
       state;
   }
 }
-function AdminDashboardScreen() {
+function AdminDashboardView() {
   const [{ loading, error, summary }, dispatch] = useReducer(reducer, {
     loading: true,
     summary: { salesData: [] },
@@ -66,8 +66,10 @@ function AdminDashboardScreen() {
     fetchData();
   }, []);
 
+  const round2 = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
+
   const data = {
-    labels: summary.salesData.map((x) => x._id), // 2022/01 2022/03
+    labels: summary.salesData.map((x) => x._id),
     datasets: [
       {
         label: 'Sales',
@@ -82,23 +84,30 @@ function AdminDashboardScreen() {
         <div>
           <ul>
             <li>
-              <Link href="/admin/dashboard">
-                <a className="font-bold">Dashboard</a>
+              <Link href="/admin/dashboard" className="font-bold text-xl">
+                Dashboard
               </Link>
             </li>
             <li>
-              <Link href="/admin/orders">Orders</Link>
+              <Link href="/admin/orders" className="text-lg p-4 italic">
+                Orders
+              </Link>
             </li>
             <li>
-              <Link href="/admin/products">Products</Link>
+              <Link href="/admin/products" className="text-lg p-4 italic">
+                Products
+              </Link>
             </li>
             <li>
-              <Link href="/admin/users">Users</Link>
+              <Link href="/admin/users" className="text-lg p-4 italic">
+                Users
+              </Link>
             </li>
           </ul>
         </div>
         <div className="md:col-span-3">
-          <h1 className="mb-4 text-xl">Admin Dashboard</h1>
+          <h1 className="mb-4 text-xl text-center">Admin Dashboard</h1>
+
           {loading ? (
             <div>Loading...</div>
           ) : error ? (
@@ -106,25 +115,36 @@ function AdminDashboardScreen() {
           ) : (
             <div>
               <div className="grid grid-cols-1 md:grid-cols-4">
-                <div className="card m-5 p-5">
-                  <p className="text-3xl">${summary.ordersPrice} </p>
+                <div className="block rounded-lg border border-gray-200 shadow-md m-auto p-6">
+                  <p className="text-3xl">${round2(summary.ordersPrice)} </p>
                   <p>Sales</p>
-                  <Link href="/admin/orders">View sales</Link>
                 </div>
                 <div className="card m-5 p-5">
                   <p className="text-3xl">{summary.ordersCount} </p>
-                  <p>Orders</p>
-                  <Link href="/admin/orders">View orders</Link>
+                  <p className="font">Orders</p>
+                  <div className="translate-y-2">
+                    <Link href="/admin/orders" className="text-green-900">
+                      View Orders
+                    </Link>
+                  </div>
                 </div>
                 <div className="card m-5 p-5">
                   <p className="text-3xl">{summary.productsCount} </p>
                   <p>Products</p>
-                  <Link href="/admin/products">View products</Link>
+                  <div className="translate-y-2">
+                    <Link href="/admin/products" className="text-green-900">
+                      View Products
+                    </Link>
+                  </div>
                 </div>
                 <div className="card m-5 p-5">
                   <p className="text-3xl">{summary.usersCount} </p>
                   <p>Users</p>
-                  <Link href="/admin/users">View users</Link>
+                  <div className="translate-y-2">
+                    <Link href="/admin/users" className="text-green-900">
+                      View Users
+                    </Link>
+                  </div>
                 </div>
               </div>
               <h2 className="text-xl">Sales Report</h2>
@@ -142,5 +162,5 @@ function AdminDashboardScreen() {
   );
 }
 
-AdminDashboardScreen.auth = { adminOnly: true };
-export default AdminDashboardScreen;
+AdminDashboardView.auth = { adminOnly: true };
+export default AdminDashboardView;

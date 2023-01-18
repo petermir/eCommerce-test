@@ -5,7 +5,7 @@ import { getSession } from 'next-auth/react';
 const handler = async (req, res) => {
   const session = await getSession({ req });
   if (!session || !session.user.isAdmin) {
-    return res.status(401).send('admin signin required');
+    return res.status(401).send('Admin signin required');
   }
 
   if (req.method === 'DELETE') {
@@ -19,7 +19,7 @@ const deleteHandler = async (req, res) => {
   await db.connect();
   const user = await User.findById(req.query.id);
   if (user) {
-    if (user.email === 'admin@example.com') {
+    if (user.email === 'admin@test.com') {
       return res.status(400).send({ message: 'Can not delete admin' });
     }
     await user.remove();

@@ -59,7 +59,7 @@ export default function ProfileScreen() {
             id="name"
             autoFocus
             {...register('name', {
-              required: 'Please enter name',
+              required: 'Please enter your name',
             })}
           />
           {errors.name && (
@@ -74,7 +74,7 @@ export default function ProfileScreen() {
             className="w-full"
             id="email"
             {...register('email', {
-              required: 'Please enter email',
+              required: 'Please enter your email',
               pattern: {
                 value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/i,
                 message: 'Please enter valid email',
@@ -93,7 +93,10 @@ export default function ProfileScreen() {
             type="password"
             id="password"
             {...register('password', {
-              minLength: { value: 6, message: 'password is more than 5 chars' },
+              minLength: {
+                value: 6,
+                message: 'Password must be longer than 5 characters',
+              },
             })}
           />
           {errors.password && (

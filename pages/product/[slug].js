@@ -54,7 +54,7 @@ export default function ProductView(props) {
             </li>
             <li>Category: {product.category}</li>
             <li>
-              {product.rating} of {product.numReviews} reviews
+              <Link href="/reviews">{product.numReviews} reviews</Link>
             </li>
             <li>Description: {product.description}</li>
           </ul>

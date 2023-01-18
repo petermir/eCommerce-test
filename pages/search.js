@@ -4,12 +4,12 @@ import { useContext } from 'react';
 import { toast } from 'react-toastify';
 import Layout from '../components/Layout';
 import { Store } from '../utils/Store';
-import { XCircleIcon } from '@heroicons/react/outline';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import ProductItem from '../components/ProductItem';
 import Product from '../models/Product';
 import db from '../utils/db';
 
-const PAGE_SIZE = 2;
+const PAGE_SIZE = 3;
 
 const prices = [
   {
@@ -34,19 +34,17 @@ export default function Search(props) {
   const {
     query = 'all',
     category = 'all',
-    brand = 'all',
     price = 'all',
     rating = 'all',
     sort = 'featured',
     page = 1,
   } = router.query;
 
-  const { products, countProducts, categories, brands, pages } = props;
+  const { products, countProducts, categories, pages } = props;
 
   const filterSearch = ({
     page,
     category,
-    brand,
     sort,
     min,
     max,
@@ -59,7 +57,6 @@ export default function Search(props) {
     if (searchQuery) query.searchQuery = searchQuery;
     if (sort) query.sort = sort;
     if (category) query.category = category;
-    if (brand) query.brand = brand;
     if (price) query.price = price;
     if (rating) query.rating = rating;
     if (min) query.min ? query.min : query.min === 0 ? 0 : min;
@@ -75,9 +72,6 @@ export default function Search(props) {
   };
   const pageHandler = (page) => {
     filterSearch({ page });
-  };
-  const brandHandler = (e) => {
-    filterSearch({ brand: e.target.value });
   };
   const sortHandler = (e) => {
     filterSearch({ sort: e.target.value });
@@ -122,18 +116,6 @@ export default function Search(props) {
             </select>
           </div>
           <div className="mb-3">
-            <h2>Brands</h2>
-            <select className="w-full" value={brand} onChange={brandHandler}>
-              <option value="all">All</option>
-              {brands &&
-                brands.map((brand) => (
-                  <option key={brand} value={brand}>
-                    {brand}
-                  </option>
-                ))}
-            </select>
-          </div>
-          <div className="mb-3">
             <h2>Prices</h2>
             <select className="w-full" value={price} onChange={priceHandler}>
               <option value="all">All</option>
@@ -164,17 +146,15 @@ export default function Search(props) {
               {products.length === 0 ? 'No' : countProducts} Results
               {query !== 'all' && query !== '' && ' : ' + query}
               {category !== 'all' && ' : ' + category}
-              {brand !== 'all' && ' : ' + brand}
               {price !== 'all' && ' : Price ' + price}
               {rating !== 'all' && ' : Rating ' + rating + ' & up'}
               &nbsp;
               {(query !== 'all' && query !== '') ||
               category !== 'all' ||
-              brand !== 'all' ||
               rating !== 'all' ||
               price !== 'all' ? (
                 <button onClick={() => router.push('/search')}>
-                  <XCircleIcon className="h-5 w-5" />
+                  <XMarkIcon className="h-5 w-5" />
                 </button>
               ) : null}
             </div>
@@ -225,7 +205,6 @@ export async function getServerSideProps({ query }) {
   const pageSize = query.pageSize || PAGE_SIZE;
   const page = query.page || 1;
   const category = query.category || '';
-  const brand = query.brand || '';
   const price = query.price || '';
   const rating = query.rating || '';
   const sort = query.sort || '';
@@ -241,7 +220,6 @@ export async function getServerSideProps({ query }) {
         }
       : {};
   const categoryFilter = category && category !== 'all' ? { category } : {};
-  const brandFilter = brand && brand !== 'all' ? { brand } : {};
   const ratingFilter =
     rating && rating !== 'all'
       ? {
@@ -275,13 +253,11 @@ export async function getServerSideProps({ query }) {
 
   await db.connect();
   const categories = await Product.find().distinct('category');
-  const brands = await Product.find().distinct('brand');
   const productDocs = await Product.find(
     {
       ...queryFilter,
       ...categoryFilter,
       ...priceFilter,
-      ...brandFilter,
       ...ratingFilter,
     },
     '-reviews'
@@ -295,7 +271,6 @@ export async function getServerSideProps({ query }) {
     ...queryFilter,
     ...categoryFilter,
     ...priceFilter,
-    ...brandFilter,
     ...ratingFilter,
   });
 
@@ -309,7 +284,6 @@ export async function getServerSideProps({ query }) {
       page,
       pages: Math.ceil(countProducts / pageSize),
       categories,
-      brands,
     },
   };
 }
