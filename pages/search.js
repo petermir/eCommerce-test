@@ -9,7 +9,7 @@ import ProductItem from '../components/ProductItem';
 import Product from '../models/Product';
 import db from '../utils/db';
 
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 6;
 
 const prices = [
   {
@@ -102,7 +102,7 @@ export default function Search(props) {
           <div className="my-3">
             <h2>Categories</h2>
             <select
-              className="w-full"
+              className="w-40"
               value={category}
               onChange={categoryHandler}
             >
@@ -117,7 +117,7 @@ export default function Search(props) {
           </div>
           <div className="mb-3">
             <h2>Prices</h2>
-            <select className="w-full" value={price} onChange={priceHandler}>
+            <select className="w-40" value={price} onChange={priceHandler}>
               <option value="all">All</option>
               {prices &&
                 prices.map((price) => (
@@ -129,7 +129,7 @@ export default function Search(props) {
           </div>
           <div className="mb-3">
             <h2>Ratings</h2>
-            <select className="w-full" value={rating} onChange={ratingHandler}>
+            <select className="w-40" value={rating} onChange={ratingHandler}>
               <option value="all">All</option>
               {ratings &&
                 ratings.map((rating) => (
@@ -140,7 +140,7 @@ export default function Search(props) {
             </select>
           </div>
         </div>
-        <div className="md:col-span-3">
+        <div className="md:col-span-4 p-10">
           <div className="mb-2 flex items-center justify-between border-b-2 pb-2">
             <div className="flex items-center">
               {products.length === 0 ? 'No' : countProducts} Results
