@@ -74,30 +74,13 @@ function Layout({ title, children }) {
             <Link href="/" className="text-3xl font-bold text-gray-100">
               NanaShop
             </Link>
-            <form
-              onSubmit={submitHandler}
-              className="mx-auto w-64 justify-center md:flex"
-            >
-              <input
-                onChange={(e) => setQuery(e.target.value)}
-                type="text"
-                className="rounded-tr-none rounded-br-none p-1 text-sm   focus:ring-0"
-                placeholder="Search products"
-              />
-              <button
-                className="rounded rounded-tl-none rounded-bl-none bg-amber-300 p-1 text-sm dark:text-black"
-                type="submit"
-                id="button-addon2"
-              >
-                <MagnifyingGlassIcon className="h-5 w-5"></MagnifyingGlassIcon>
-              </button>
-            </form>
+
             <div className="flex">
               {status === 'loading' ? (
                 'Loading'
               ) : session?.user ? (
                 <Menu as="div" className="relative flex">
-                  <Menu.Button className="text-blue-600 pr-2">
+                  <Menu.Button className="text-gray-100 pr-2">
                     <ChevronDownIcon className="h-5 w-5 m-auto"></ChevronDownIcon>
                     {session.user.name}
                   </Menu.Button>
@@ -155,7 +138,27 @@ function Layout({ title, children }) {
           </nav>
         </header>
 
-        <main className="m-auto mt-4 px-5">{children}</main>
+        <main className="m-auto mt-4 px-5">
+          <form
+            onSubmit={submitHandler}
+            className="mx-auto w-64 justify-center md:flex pb-8 text-center"
+          >
+            <input
+              onChange={(e) => setQuery(e.target.value)}
+              type="text"
+              className="rounded-tr-none rounded-br-none p-1 text-sm   focus:ring-0"
+              placeholder="Search products"
+            />
+            <button
+              className="rounded rounded-tl-none rounded-bl-none bg-amber-300 p-1 text-sm dark:text-black"
+              type="submit"
+              id="button-addon2"
+            >
+              <MagnifyingGlassIcon className="h-5 w-5"></MagnifyingGlassIcon>
+            </button>
+          </form>
+          {children}
+        </main>
 
         <footer>
           <div className="text-center">
@@ -196,7 +199,7 @@ function Layout({ title, children }) {
           </div> */}
 
           <div>
-            <p>
+            <p className="text-gray-200">
               Copyright &copy; 2023 <em>NanaShop</em>
             </p>
           </div>
