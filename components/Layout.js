@@ -65,7 +65,7 @@ function Layout({ title, children }) {
         <header className="static">
           <nav className="flex h-24 items-center justify-between px-5 shadow-lg">
             <Link href="/" className="text-3xl font-bold text-gray-100">
-              NanaShop W
+              NanaShop
             </Link>
 
             <div className="flex">

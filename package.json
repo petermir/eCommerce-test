@@ -10,6 +10,7 @@
     "watch": "tailwindcss -i ./styles/globals.css -o ./dist/output.css --watch"
   },
   "dependencies": {
+    "@chec/commerce.js": "^2.8.0",
     "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
     "@next/font": "^13.1.1",
