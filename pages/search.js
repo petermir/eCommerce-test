@@ -98,15 +98,15 @@ export default function Search(props) {
   return (
     <Layout title="search">
       <div className="grid md:grid-cols-4 md:gap-5">
-        <div>
-          <div className="my-3">
+        <div className="flex gap-4">
+          <div className="mb-3">
             <h2>Categories</h2>
             <select
-              className="w-40"
+              className="w-24 text-gray-600"
               value={category}
               onChange={categoryHandler}
             >
-              <option value="all">All</option>
+              <option value="all">Select</option>
               {categories &&
                 categories.map((category) => (
                   <option key={category} value={category}>
@@ -117,8 +117,12 @@ export default function Search(props) {
           </div>
           <div className="mb-3">
             <h2>Prices</h2>
-            <select className="w-40" value={price} onChange={priceHandler}>
-              <option value="all">All</option>
+            <select
+              className="w-24 text-gray-600"
+              value={price}
+              onChange={priceHandler}
+            >
+              <option value="all">Select</option>
               {prices &&
                 prices.map((price) => (
                   <option key={price.value} value={price.value}>
@@ -129,8 +133,12 @@ export default function Search(props) {
           </div>
           <div className="mb-3">
             <h2>Ratings</h2>
-            <select className="w-40" value={rating} onChange={ratingHandler}>
-              <option value="all">All</option>
+            <select
+              className="w-24 text-gray-600"
+              value={rating}
+              onChange={ratingHandler}
+            >
+              <option value="all">Select</option>
               {ratings &&
                 ratings.map((rating) => (
                   <option key={rating} value={rating}>
@@ -160,7 +168,11 @@ export default function Search(props) {
             </div>
             <div>
               Sort by{' '}
-              <select value={sort} onChange={sortHandler}>
+              <select
+                value={sort}
+                onChange={sortHandler}
+                className="w-28 text-gray-600"
+              >
                 <option value="featured">Featured</option>
                 <option value="lowest">Price: Low to High</option>
                 <option value="highest">Price: High to Low</option>

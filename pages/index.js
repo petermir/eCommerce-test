@@ -6,6 +6,7 @@ import ProductItem from '../components/ProductItem';
 import Product from '../models/Product';
 import db from '../utils/db';
 import { Store } from '../utils/Store';
+import Slides from '../components/Slides';
 
 export default function Home({ products }) {
   const { state, dispatch } = useContext(Store);
@@ -27,6 +28,10 @@ export default function Home({ products }) {
 
   return (
     <Layout title="Home Page">
+      <Slides />
+      <h2 className="text-center text-3xl pb-4 text-gray-700">
+        Featured Products
+      </h2>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
         {products.map((product) => (
           <ProductItem

@@ -30,6 +30,10 @@ footer {
   scale: 0.25;
 }
 
+.bold {
+  font-weight: 700;
+}
+
 .card {
   @apply mb-5 block rounded-lg border border-gray-200 shadow-md;
 }

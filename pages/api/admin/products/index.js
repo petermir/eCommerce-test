@@ -18,11 +18,11 @@ const handler = async (req, res) => {
 const postHandler = async (req, res) => {
   await db.connect();
   const newProduct = new Product({
-    name: 'sample name',
+    name: 'Enter product name',
     slug: 'sample-name-' + Math.random(),
-    image: '/images/ex.jpg',
-    price: 0,
-    category: 'sample category',
+    image: '',
+    price: '',
+    category: 'Enter category',
     countInStock: 0,
     description: 'sample description',
     rating: 0,
