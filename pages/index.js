@@ -32,7 +32,7 @@ export default function Home({ products }) {
       <h2 className="text-center text-3xl pb-4 text-gray-700">
         Featured Products
       </h2>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-8 md:pt-4 pt-0">
         {products.map((product) => (
           <ProductItem
             product={product}

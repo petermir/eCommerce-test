@@ -34,7 +34,7 @@ export default function ProductView(props) {
   return (
     <Layout title={product.name}>
       <div className="py-2">
-        <Link href="/">back to products</Link>
+        <Link href="/">Back to products</Link>
       </div>
 
       <div className="grid md:grid-cols-4 md:gap-3">

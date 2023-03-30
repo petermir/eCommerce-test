@@ -7,7 +7,7 @@ import { FaYoutube } from 'react-icons/fa';
 function Footer() {
   return (
     <>
-      <div className="md:flex md:justify-around md:items-center sm:px-12 px-4 bg-gray-100 py-5 shadow-md">
+      <div className="md:flex md:justify-around md:items-center sm:px-12 px-4 bg-gray-100 py-5">
         <h1 className="text-center text-2xl py-4">
           <span className="text-amber-700">Sign up </span>for news and updates
         </h1>
@@ -94,7 +94,7 @@ function Footer() {
           className=" text-gray-800 font-semibold pb-4 text-sm
 				"
         >
-          &copy; 2023 <em>NanaShop.</em> All rights reserved
+          &copy; 2023 <em>Demo-Shop.</em> All rights reserved
         </h1>
       </div>
     </>

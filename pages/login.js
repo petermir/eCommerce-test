@@ -40,11 +40,8 @@ export default function LoginView() {
   };
   return (
     <Layout title="Login">
-      <form
-        className="mx-auto max-w-screen-md"
-        onSubmit={handleSubmit(submitHandler)}
-      >
-        <h1 className="mb-4 text-xl">Login</h1>
+      <form className="mx-auto w-60" onSubmit={handleSubmit(submitHandler)}>
+        <h1 className="mb-4 text-xl text-center">Login</h1>
         <div className="mb-4">
           <label htmlFor="email">Email</label>
           <input
@@ -83,10 +80,10 @@ export default function LoginView() {
             <div className="text-red-500 ">{errors.password.message}</div>
           )}
         </div>
-        <div className="mb-4 ">
+        <div className="mb-4 text-center">
           <button className="primary-button">Login</button>
         </div>
-        <div className="mb-4 ">
+        <div className="mb-4 text-center">
           Don&apos;t have an account? &nbsp;
           <Link
             href={`/register?redirect=${redirect || '/'}`}

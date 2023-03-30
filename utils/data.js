@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs';
+/* import bcrypt from 'bcryptjs';
 
 const data = {
   users: [
@@ -28,7 +28,6 @@ const data = {
       countInStock: 4,
       description: 'A popular sample',
       isFeatured: true,
-      banner: '/images/ex2.jpg',
     },
     {
       name: 'red-gold sample',
@@ -93,3 +92,4 @@ const data = {
 };
 
 export default data;
+ */
