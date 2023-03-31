@@ -94,7 +94,7 @@ function Footer() {
           className=" text-gray-800 font-semibold pb-4 text-sm
 				"
         >
-          &copy; 2023 <em>Demo-Shop.</em> All rights reserved
+          &copy; 2023 <em>DemoShop.</em> All rights reserved
         </h1>
       </div>
     </>

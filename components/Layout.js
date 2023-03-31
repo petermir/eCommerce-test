@@ -50,14 +50,12 @@ function Layout({ title, children }) {
 
       <ToastContainer
         position="top-center"
-        autoClose={3000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
         rtl={false}
-        pauseOnFocusLoss
         draggable
-        pauseOnHover
         theme="light"
         limit={3}
       />
@@ -65,8 +63,11 @@ function Layout({ title, children }) {
       <div className="flex min-h-screen m-auto flex-col justify-between">
         <header className="static w-full nav-shadow">
           <nav className="flex h-20 items-center justify-between px-5 bg-col1">
-            <Link href="/" className="text-3xl font-bold text-gray-100">
-              Demo-Shop
+            <Link
+              href="/"
+              className="text-3xl font-bold text-gray-100 translate-x-4"
+            >
+              DemoShop
             </Link>
 
             <div className="flex">
